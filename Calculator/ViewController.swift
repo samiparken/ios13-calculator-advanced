@@ -13,6 +13,9 @@ class ViewController: UIViewController {
             }
             return number
         }
+        set {
+            displayLabel.text = String(newValue)
+        }
     }
     
 //MARK: - Buttons
@@ -22,11 +25,11 @@ class ViewController: UIViewController {
         
         if let calcMethod = sender.currentTitle {
             if calcMethod == "+/-" {
-                displayLabel.text = String( displayValue * (-1) )
+                displayValue *= -1
             } else if calcMethod == "AC" {
-                displayLabel.text = "0"
+                displayValue = 0
             } else if calcMethod == "%" {
-                displayLabel.text = String( displayValue * 0.01 )
+                displayValue *= 0.01
             }
         }
     }
@@ -36,7 +39,7 @@ class ViewController: UIViewController {
             
         if let numValue = sender.currentTitle {
             if isFinishedTypingNumber {
-                displayLabel.text = numValue
+                displayValue = Double(numValue)!
                 isFinishedTypingNumber = false
             } else {
                 

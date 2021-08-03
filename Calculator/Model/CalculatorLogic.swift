@@ -1,23 +1,23 @@
 import Foundation
 
-class CalculatorLogic {
-
-    var number: Double
+struct CalculatorLogic {
     
-    init(number: Double) {
+    private var number: Double?
+    
+    mutating func setNumber(_ number: Double) {
         self.number = number
     }
     
     func calculate(symbol: String) -> Double? {
-        if symbol == "+/-" {
-            return number * -1
-        } else if symbol == "AC" {
-            return 0
-        } else if symbol == "%" {
-            return number * 0.01
-        } else {
-            return nil
+        if let n = number {
+            if symbol == "+/-" {
+                return n * -1
+            } else if symbol == "AC" {
+                return 0
+            } else if symbol == "%" {
+                return n * 0.01
+            }
         }
+        return nil
     }
-    
 }

@@ -5,23 +5,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var displayLabel: UILabel!
     
     private var isFinishedTypingNumber: Bool = true
-        
+    
+    private var displayValue: Double {
+        get {
+            guard let number = Double(displayLabel.text!) else {
+                fatalError("Cannot convert displayLabel.text to a Double")
+            }
+            return number
+        }
+    }
+    
 //MARK: - Buttons
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         isFinishedTypingNumber = true
         
-        guard let number = Double(displayLabel.text!) else {
-            fatalError("Cannot convert displayLabel.text to a Double")
-        }  // for testing and catching where the error happens
-
         if let calcMethod = sender.currentTitle {
             if calcMethod == "+/-" {
-                displayLabel.text = String(number * (-1))
+                displayLabel.text = String( displayValue * (-1) )
             } else if calcMethod == "AC" {
                 displayLabel.text = "0"
             } else if calcMethod == "%" {
-                displayLabel.text = String( number * 0.01 )
+                displayLabel.text = String( displayValue * 0.01 )
             }
         }
     }
@@ -36,7 +41,7 @@ class ViewController: UIViewController {
             } else {
                 
                 if numValue == "." {
-                    let isInt = floor(Double(displayLabel.text!)!) == Double(displayLabel.text!)
+                    let isInt = floor(displayValue) == displayValue
                     if isInt { return }
                 } else {
                     displayLabel.text = displayLabel.text! + numValue

@@ -5,7 +5,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var displayLabel: UILabel!
     
     private var isFinishedTypingNumber: Bool = true
-    
+        
 //MARK: - Buttons
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
@@ -21,11 +21,9 @@ class ViewController: UIViewController {
             } else if calcMethod == "AC" {
                 displayLabel.text = "0"
             } else if calcMethod == "%" {
-                displayLabel.text = String( number / 100 )
+                displayLabel.text = String( number * 0.01 )
             }
         }
-        
-        
     }
 
     
@@ -36,7 +34,14 @@ class ViewController: UIViewController {
                 displayLabel.text = numValue
                 isFinishedTypingNumber = false
             } else {
-                displayLabel.text = displayLabel.text! + numValue
+                
+                if numValue == "." {
+                    let isInt = floor(Double(displayLabel.text!)!) == Double(displayLabel.text!)
+                    if isInt { return }
+                } else {
+                    displayLabel.text = displayLabel.text! + numValue
+
+                }
             }
         }
     }

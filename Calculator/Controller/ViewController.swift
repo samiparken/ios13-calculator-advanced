@@ -26,8 +26,9 @@ class ViewController: UIViewController {
         isFinishedTypingNumber = true
         if let calcMethod = sender.currentTitle {
             calculator.setNumber(displayValue)
-            guard let result = calculator.calculate(symbol: calcMethod) else { fatalError("Result of the calculation is nil")}
-            displayValue = result
+            if let result = calculator.calculate(symbol: calcMethod) {
+                displayValue = result
+            } 
         }
     }
     
